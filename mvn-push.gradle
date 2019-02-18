@@ -1,0 +1,33 @@
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories.mavenDeployer {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//        repository(url: repositories.mavenLocal().getUrl())
+        repository(url: properties.getProperty("REPOSITORY_URL")) {
+            authentication(userName: properties.getProperty("REPOSITORY_USER_NAME"), password: properties.getProperty("REPOSITORY_PASSWORD"))
+        }
+
+        pom.groupId = PROJ_GROUP
+        pom.artifactId = PROJ_ARTIFACTID
+        pom.version = PROJ_VERSION
+        pom.project {
+            licenses {
+                license {
+                    name PROJ_LICENCE_NAME
+                    url PROJ_LICENCE_URL
+                    distribution PROJ_LICENCE_DEST
+                }
+            }
+            developers {
+                developer {
+                    id DEVELOPER_ID
+                    name DEVELOPER_NAME
+                    email DEVELOPER_EMAIL
+                }
+            }
+        }
+    }
+}
+

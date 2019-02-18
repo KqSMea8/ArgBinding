@@ -1,0 +1,8 @@
+apply plugin: 'java-library'
+apply from: rootProject.file('mvn-push.gradle')
+
+compileJava {
+    sourceCompatibility JAVA_VERSION
+    targetCompatibility JAVA_VERSION
+}
+
